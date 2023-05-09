@@ -22,14 +22,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  void startAddingItem(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return NewTransaction();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('expence tracker')),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
+        ),
+        appBar: AppBar(
+          title: Text('expence tracker'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {},
+            )
+          ],
+        ),
         body: Column(
           children: [
             Chart(),
